@@ -22,16 +22,20 @@ class Memoized:
         self.call_args_queue.append(key)
 
     def _evict_cache_if_necessary(self):
-        if len(self.call_args_queue) > self.cache_size:
+        if len(self.call_args_queue) >= self.cache_size:
             oldest_key = self.call_args_queue.popleft()
             del self.call_args_to_result[oldest_key]
 
     @staticmethod
     def _convert_call_arguments_to_hash(args, kwargs):
-        return hash(str(args) + str(kwargs))
+        return str(args[0])
 
 
-@Memoized(cache_size=5)
+@Memoized(cache_size=2)
 def get_not_so_random_number_with_max(max_value):
     import random
     return random.random() * max_value
+
+
+for i in range(10):
+    get_not_so_random_number_with_max(i)
