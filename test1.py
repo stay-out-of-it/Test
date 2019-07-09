@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class Memoized:
     def __init__(self, cache_size=100):
         self.cache_size = cache_size
