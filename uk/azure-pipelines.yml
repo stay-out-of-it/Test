@@ -1,0 +1,24 @@
+---
+pool:
+  vmImage: ubuntu-latest
+steps:
+- displayName: Використовувати Python $ (python.version)
+  inputs:
+    versionSpec: "$ (python.version)"
+  task: UsePythonVersion @ 0
+- displayName: Встановіть залежності
+  script: python -m pip install --upgrade pip pip install -r requirements.txt
+- displayName: питест
+  script: піп встановити найчистіші-блакитні трубопроводи
+strategy:
+  matrix:
+    Python27:
+      python.version: '2.7'
+    Python35:
+      python.version: '3.5'
+    Python36:
+      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
+trigger:
+- майстер
